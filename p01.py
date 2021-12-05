@@ -25,7 +25,6 @@ def part2(input_list):
 
 
 def p01():
-    # Day 2
     filename1 = "inputs/01.txt"
     input_list1 = get_input_as_list(filename1, "int")
 

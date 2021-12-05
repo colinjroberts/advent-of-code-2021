@@ -75,7 +75,6 @@ def recursive_list_search_for_number(matrix, bit, search_direction):
 
 
 def p03():
-    # Day 2
     filename_test = "inputs/03-test.txt"
     input_list_test = get_input_as_list(filename_test, "string")
 

@@ -61,7 +61,6 @@ def part2(input_list):
 
 
 def p02():
-    # Day 2
     filename1 = "inputs/02.txt"
     input_list1 = get_input_as_list(filename1, "string")
 
