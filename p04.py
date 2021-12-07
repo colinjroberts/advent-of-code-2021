@@ -1,4 +1,4 @@
-from tools import (get_input_as_list,)
+from tools import (get_line_input_as_list, )
 
 class Game:
     def __init__(self, input_list):
@@ -164,10 +164,10 @@ def part2(input_list):
 
 def p04():
     filename_test = "inputs/04-test.txt"
-    input_list_test = get_input_as_list(filename_test, "string")
+    input_list_test = get_line_input_as_list(filename_test, "string")
 
     filename = "inputs/04.txt"
-    input_list = get_input_as_list(filename, "string")
+    input_list = get_line_input_as_list(filename, "string")
 
     output1 = part1(input_list)
     output2 = part2(input_list)

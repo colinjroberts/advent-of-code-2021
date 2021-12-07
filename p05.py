@@ -1,4 +1,4 @@
-from tools import (get_input_as_list,)
+from tools import (get_line_input_as_list, )
 
 """
 Possible Approaches:
@@ -110,10 +110,10 @@ def part2(input_list):
 
 def p05():
     filename_test = "inputs/05-test.txt"
-    input_list_test = get_input_as_list(filename_test, "string")
+    input_list_test = get_line_input_as_list(filename_test, "string")
 
     filename = "inputs/05.txt"
-    input_list = get_input_as_list(filename, "string")
+    input_list = get_line_input_as_list(filename, "string")
 
     output1 = part1(input_list)
     output2 = part2(input_list)

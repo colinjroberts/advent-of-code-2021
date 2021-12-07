@@ -1,4 +1,4 @@
-from tools import (get_input_as_list,)
+from tools import (get_line_input_as_list, )
 
 class Submarine:
     def __init__(self):
@@ -62,7 +62,7 @@ def part2(input_list):
 
 def p02():
     filename1 = "inputs/02.txt"
-    input_list1 = get_input_as_list(filename1, "string")
+    input_list1 = get_line_input_as_list(filename1, "string")
 
     output1 = part1(input_list1)
     output2 = part2(input_list1)

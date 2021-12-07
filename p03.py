@@ -1,4 +1,4 @@
-from tools import (get_input_as_list,)
+from tools import (get_line_input_as_list, )
 
 
 def part1(input_list):
@@ -76,10 +76,10 @@ def recursive_list_search_for_number(matrix, bit, search_direction):
 
 def p03():
     filename_test = "inputs/03-test.txt"
-    input_list_test = get_input_as_list(filename_test, "string")
+    input_list_test = get_line_input_as_list(filename_test, "string")
 
     filename = "inputs/03.txt"
-    input_list = get_input_as_list(filename, "string")
+    input_list = get_line_input_as_list(filename, "string")
 
     output1 = part1(input_list)
     output2 = part2(input_list)
