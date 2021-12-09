@@ -96,18 +96,18 @@ def build_day(day):
 
     def make_script_file(day):
         script_template = f'from tools import get_csv_line_input_as_list \n\n\
-        def part1():\n\
-        \tpass\n\n\
-        def part2():\n\
-        \tpass\n\n\
-        def p{day:02d}():\n\
-        \tfilename = "inputs/{day:02d}"\n\
-        \text = ".txt"\n\
-        \tinput_list = get_csv_line_input_as_list(filename + ext, "int")\n\
-        \tinput_list_test = get_csv_line_input_as_list(filename + "-test" + ext, "int")\n\n\
-        \toutput1 = part1(input_list_test)\n\
-        \t# output2 = part2(input_list_test)\n\n\
-        \treturn output1\n'
+def part1():\n\
+\tpass\n\n\
+def part2():\n\
+\tpass\n\n\
+def p{day:02d}():\n\
+\tfilename = "inputs/{day:02d}"\n\
+\text = ".txt"\n\
+\tinput_list = get_csv_line_input_as_list(filename + ext, "int")\n\
+\tinput_list_test = get_csv_line_input_as_list(filename + "-test" + ext, "int")\n\n\
+\toutput1 = part1(input_list_test)\n\
+\t# output2 = part2(input_list_test)\n\n\
+\treturn output1\n'
 
         with open(f"p{day:02d}.py", 'w') as f:
             f.write(script_template)
@@ -144,7 +144,6 @@ def build_day(day):
 
     return True
 
-
-
 if __name__ == "__main__":
-    print(build_day(8))
+    # build_day(8)
+    pass
