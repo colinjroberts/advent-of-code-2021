@@ -15,7 +15,7 @@ day_script_dict = {
     # 6: p06(),
     7: p07(),
 }
-#
+
 if __name__ == '__main__':
     start, end = 7, 7
     for day in range(start, end+1):
