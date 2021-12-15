@@ -10,6 +10,7 @@ from p09 import p09
 from p10 import p10
 from p11 import p11
 from p12 import p12
+from p13 import p13
 
 day_script_dict = {
     # 1: p01(),
@@ -23,11 +24,12 @@ day_script_dict = {
     # 9: p09(),
     # 10: p10(),
     # 11: p11(),
-    12: p12(),
+    # 12: p12(),
+    13: p13(),
 }
 
 if __name__ == '__main__':
-    start, end = 12, 12
+    start, end = 13, 13
     for day in range(start, end+1):
         if day not in day_script_dict:
             raise KeyError("Day must be imported and added to day_script_dict before calling.")
