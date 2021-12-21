@@ -19,8 +19,7 @@ class PacketReader:
         self.binary_data = self.convert_input_to_binary()
         self.packet_total_length = len(self.binary_data)
         self.current_digit = 0
-        self.end_at_length = []
-        self.operations = []
+        self.end_at_length = [] # for ending operator packets with length_id 0
         self.operator_lookup = {
             0: "sum",
             1: "product",
@@ -39,10 +38,23 @@ class PacketReader:
             print(f"{self.binary_data=}")
 
     def parse_packet(self, depth=0):
-        """Runs through a whole packet
+        """Runs through a whole packet and sums version numbers for part 1 and performs the operations for part 2.
 
-        Sums the version numbers for part 1 and performs the operations for part 2 as it goes
+        General structure is as follows:
+        - Check version number
+        - Check id number
+        - If it's a literal packet, get and return the number
+        - Otherwise it is an operator packet:
+            - Get length version (next bit)
+            - if 0:
+                - make note of how long the subpackets are, and until that length is reached
+                  get subpackets and add their result to a list
+                - when no more subpackets, return the operation over the subpackets
+            - else it's 1:
+                - for each subpacket, add the value of the subpacket to a list
+                - when no more subpackets, return the operation over the subpackets
         """
+
         if self.debug and depth != 0:
             print(f"---------------")
             print(f"{depth=}, {self.current_digit=} of {len(self.binary_data)=}")
@@ -51,7 +63,7 @@ class PacketReader:
         # Check first three numbers for version number
         packet_version = self.get_next_numbers(3)
         if self.debug: print(f"{packet_version=}, {int(packet_version, 2)}")
-        self.packet_version_numbers.append(int(packet_version, 2))
+        self.packet_version_numbers.append(int(packet_version, 2)) # part 1
 
         # Check second three numbers for id number
         packet_id = self.get_next_numbers(3)
@@ -72,7 +84,6 @@ class PacketReader:
             literal_packet_value += self.get_next_numbers(4)
             if self.debug: print(f"{literal_packet_value=}, {int(literal_packet_value, 2)}")
 
-            self.operations.append(int(literal_packet_value, 2))
             return int(literal_packet_value, 2)
 
         # Operator packet
@@ -82,9 +93,6 @@ class PacketReader:
 
             # Check next number
             packet_length_id = self.get_next_numbers(1)
-
-            self.operations.append(self.operator_lookup[int(packet_id, 2)])
-
             if self.debug: print(f"{packet_length_id=}, {int(packet_length_id, 2)}")
 
             # If 0:
@@ -150,13 +158,10 @@ class PacketReader:
     def get_sum_of_version_numbers(self):
         return sum(self.packet_version_numbers)
 
-    def get_list_of_operations(self):
-        return self.operations
-
     def perform_operation(self, operation, numbers):
 
         if operation == "sum":
-            print(f"pushing {sum(numbers)=} to stack")
+            if self.debug: print(f"pushing {sum(numbers)=} to stack")
             return sum(numbers)
 
         elif operation == "product":
@@ -165,30 +170,29 @@ class PacketReader:
             result_explanation = "*".join(num_list)
             for number in numbers:
                 result *= number
-            print(f"pushing {result_explanation} {result=} to stack")
+            if self.debug: print(f"pushing {result_explanation} {result=} to stack")
             return result
 
         elif operation == "min":
-            print(f"pushing {min(numbers)=} to stack")
+            if self.debug: print(f"pushing {min(numbers)=} to stack")
             return min(numbers)
 
         elif operation == "max":
-            print(f"pushing {max(numbers)=} to stack")
+            if self.debug: print(f"pushing {max(numbers)=} to stack")
             return max(numbers)
 
         elif operation == "gt":
             # Pretty sure these should be in the correct order
-            print(f"pushing {int(numbers[0] > numbers[1])=} to the stack")
+            if self.debug: print(f"pushing {int(numbers[0] > numbers[1])=} to the stack")
             return int(numbers[0] > numbers[1])
 
         elif operation == "lt":
-            print(f"pushing {int(numbers[0] < numbers[1])=} to the stack")
+            if self.debug: print(f"pushing {int(numbers[0] < numbers[1])=} to the stack")
             return int(numbers[0] < numbers[1])
 
         elif operation == "eq":
-            print(f"pushing {int(numbers[-1] == numbers[-2])=} to the stack")
+            if self.debug: print(f"pushing {int(numbers[-1] == numbers[-2])=} to the stack")
             return int(numbers[-1] == numbers[-2])
-
 
 
 def part1(input_list, test=False, debug=False):
@@ -227,8 +231,8 @@ def p16():
     input_list_test2 = get_line_input_as_list(filename + "-test2" + ext, "string")
 
     # output1 = part1(input_list_test2, test=True, debug=True)
-    # output1 = part1(input_list, test=False, debug=False)
+    output1 = part1(input_list, test=False, debug=False)
     # output2 = part2(input_list_test2, test=True, debug=False)
-    output2 = part2(input_list, test=False, debug=True)
+    output2 = part2(input_list, test=False, debug=False)
 
-    return output2
+    return output1, output2
